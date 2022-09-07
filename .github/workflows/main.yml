@@ -3,33 +3,46 @@ name: pydistro_testing project Action
 on: push
 
 jobs:
-  build-n-publish:
-    name: Build and Publish pydistro_testing project
+  # build-n-publish-testpypi:
+  #   name: Build and Publish pydistro_testing project
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #   - uses: actions/checkout@main
+  #   - name: Set up Python 3.10
+  #     uses: actions/setup-python@v3
+  #     with:
+  #       python-version: "3.10"
+  #   - name: Install pypa/build
+  #     run: >-
+  #       python -m
+  #       pip install
+  #       build
+  #       --user
+  #   - name: Build a binary wheel and source tarball
+  #     run: >-
+  #       python -m
+  #       build
+  #       --sdist
+  #       --wheel
+  #       --outdir dist/
+  #       .
+  #   - name: Publish pydistro_testing to TestPyPI
+  #     if: startsWith(github.ref, 'refs/tags')
+  #     uses: pypa/gh-action-pypi-publish@master
+  #     with:
+  #       verbose: true
+  #       password: ${{ secrets.PYDISTRO_TESTING_TESTPYPI }}
+  #       repository_url: https://test.pypi.org/legacy/
+  build-and-publish-conda:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@main
-    - name: Set up Python 3.10
-      uses: actions/setup-python@v3
-      with:
-        python-version: "3.10"
-    - name: Install pypa/build
-      run: >-
-        python -m
-        pip install
-        build
-        --user
-    - name: Build a binary wheel and source tarball
-      run: >-
-        python -m
-        build
-        --sdist
-        --wheel
-        --outdir dist/
-        .
-    - name: Publish pydistro_testing to TestPyPI
+    - name: publish-to-conda
       if: startsWith(github.ref, 'refs/tags')
-      uses: pypa/gh-action-pypi-publish@master
+      uses: MichaelsJP/conda-package-publish-action@v1.0.0
       with:
-        verbose: true
-        password: ${{ secrets.PYDISTRO_TESTING_TESTPYPI }}
-        repository_url: https://test.pypi.org/legacy/
+        subDir: '.conda'
+        AnacondaToken: ${{ secrets.ANACONDA_TOKEN }}
+        platforms: 'all'
+        override: true
+        dry_run: true
