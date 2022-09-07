@@ -39,10 +39,8 @@ jobs:
     - uses: actions/checkout@main
     - name: publish-to-conda
       if: startsWith(github.ref, 'refs/tags')
-      uses: MichaelsJP/conda-package-publish-action@v1.1.0
+      uses: fcakyon/conda-publish-action@v1.3
       with:
-        subDir: '.conda'
-        AnacondaToken: ${{ secrets.ANACONDA_TOKEN }}
-        platforms: 'all'
-        override: true
-        dry_run: true
+        subdir: 'conda'
+        anacondatoken: ${{ secrets.ANACONDA_TOKEN }}
+        platforms: 'win osx linux'
