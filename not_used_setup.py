@@ -1,8 +1,9 @@
-from distutils.core import setup
+# from distutils.core import setup
+import setuptools
 
-setup(
+setuptools.setup(
    name='pydistro_testing',
-   version='1.3.10',
+   version='1.3.11',
    description='Testing python open source',
    author='spatterson82',
    author_email='spatterson82@hotmail.com',
