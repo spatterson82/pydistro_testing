@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from distutils.core import setup
+from setuptools import setup, find_packages
 
 setup(name='pydistro_testing',
       version='1.0',
@@ -8,6 +8,5 @@ setup(name='pydistro_testing',
       author='Stephen Patterson',
       author_email='spatterson82@hotmail.com',
       url='https://github.com/spatterson82/pydistro_testing',
-      packages=['pydistro_testing'],
-      package_dir={'pydistro_testing': 'src/pydistro_testing'}
+      packages=find_packages(include=['pydistro_testing', 'pydistro_testing.*']),
      )
