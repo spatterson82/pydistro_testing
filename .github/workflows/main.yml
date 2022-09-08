@@ -28,7 +28,7 @@ jobs:
         .
     - name: Publish pydistro_testing to TestPyPI
       if: startsWith(github.ref, 'refs/tags')
-      uses: pypa/gh-action-pypi-publish@master
+      uses: pypa/gh-action-pypi-publish@release/v1
       with:
         verbose: true
         password: ${{ secrets.PYDISTRO_TESTING_TESTPYPI }}
@@ -36,11 +36,11 @@ jobs:
   build-and-publish-conda:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@main
+    - uses: actions/checkout@v1
     - name: publish-to-conda
       if: startsWith(github.ref, 'refs/tags')
-      uses: fcakyon/conda-publish-action@v1.3
+      uses: maxibor/conda-package-publish-action@v1.1
       with:
-        subdir: 'conda'
-        anacondatoken: ${{ secrets.ANACONDA_TOKEN }}
-        platforms: 'win osx linux'
+        verbose: true
+        subDir: 'conda'
+        AnacondaToken: ${{ secrets.ANACONDA_TOKEN }}
