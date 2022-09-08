@@ -33,24 +33,14 @@ jobs:
         verbose: true
         password: ${{ secrets.PYDISTRO_TESTING_TESTPYPI }}
         repository_url: https://test.pypi.org/legacy/
-  # build-and-publish-conda:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #   - uses: actions/checkout@main
-  #   - name: publish-to-conda
-  #     if: startsWith(github.ref, 'refs/tags')
-  #     uses: maxibor/conda-package-publish-action@v1.1
-  #     with:
-  #       subDir: 'conda'
-  #       AnacondaToken: ${{ secrets.ANACONDA_TOKEN }}
-
-    # runs-on: ubuntu-latest
-    # steps:
-    # - uses: actions/checkout@main
-    # - name: publish-to-conda
-    #   if: startsWith(github.ref, 'refs/tags')
-    #   uses: fcakyon/conda-publish-action@v1.3
-    #   with:
-    #     subdir: 'conda'
-    #     anacondatoken: ${{ secrets.ANACONDA_TOKEN }}
-    #     platforms: 'win osx linux'
+  build-and-publish-conda:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@main
+    - name: publish-to-conda
+      if: startsWith(github.ref, 'refs/tags')
+      uses: fcakyon/conda-publish-action@v1.3
+      with:
+        subdir: 'conda'
+        anacondatoken: ${{ secrets.ANACONDA_TOKEN }}
+        platforms: 'win osx linux'
