@@ -8,5 +8,6 @@ setup(name='pydistro_testing',
       author='Stephen Patterson',
       author_email='spatterson82@hotmail.com',
       url='https://github.com/spatterson82/pydistro_testing',
-      packages=['pydistro_testing']
+      packages=['pydistro_testing'],
+      package_dir={'pydistro_testing': 'src/pydistro_testing'}
      )
