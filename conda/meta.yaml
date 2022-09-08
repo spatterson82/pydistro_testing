@@ -1,6 +1,6 @@
 package:
   name: "pydistro_testing"
-  version: "1.3.10"
+  version: "1.3.11"
 
 source:
   path: ./src
